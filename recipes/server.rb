@@ -33,8 +33,13 @@ end
 
 include_recipe "munin::client"
 
-sysadmins = search(:users, 'groups:sysadmin')
-munin_servers = search(:node, "munin:[* TO *] AND chef_environment:#{node.chef_environment}")
+# TODO: make it possible to use server too
+# sysadmins = search(:users, 'groups:sysadmin'
+sysadmin = []
+# TODO: make it possible to use server too
+# munin_servers = search(:node, "munin:[* TO *] AND chef_environment:#{node.chef_environment}")
+munin_servers = [node]
+
 if munin_servers.empty?
   Chef::Log.info("No nodes returned from search, using this node so munin configuration has data")
   munin_servers = Array.new
