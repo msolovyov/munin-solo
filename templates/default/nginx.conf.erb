@@ -1,7 +1,9 @@
 server {
   
   listen <%= @listen_port %>;
-  server_name munin munin.<%= @chef_env %>.<%= @public_domain %> <%= @fqdn %>;
+<%# FIXME: code below use hardcoded interface eth0 - either make it to autodetect or use config -%>
+<%# FIXME: is there an easier way to get IP of a node? -%>
+  server_name munin <%= node[:network][:interfaces][:eth0][:addresses].keys.find {|x| x =~ /^(\d{1,3}\.){3}\d{1,3}$/} -%>;
   access_log <%= File.join(@log_dir, 'nginx_access.log') %>;
   error_log <%= File.join(@log_dir, 'nginx_error.log') %>;
 
