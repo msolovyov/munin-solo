@@ -35,7 +35,7 @@ include_recipe "munin::client"
 
 # TODO: make it possible to use server too
 # sysadmins = search(:users, 'groups:sysadmin'
-sysadmin = []
+sysadmins = []
 # TODO: make it possible to use server too
 # munin_servers = search(:node, "munin:[* TO *] AND chef_environment:#{node.chef_environment}")
 munin_servers = [node]
