@@ -27,6 +27,7 @@ when :nginx
   include_recipe 'munin::server_nginx'
   web_user = node[:nginx][:user]
   web_group = node[:nginx][:group]
+  include_recipe'munin::nginx'
 else
   raise "Unsupported web server type provided for munin. Supported: apache or nginx"
 end
