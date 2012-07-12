@@ -1,3 +1,53 @@
+Munin solo
+==========
+
+This is adaptation of original Opscode munin cookbook fro chef-solo. See below comments about impossibility to use munin cookbook with chef-solo.
+
+Limitations
+-----------
+
+No data bags available therefore, no seaches can be performed durng deployment. This leads to the following:
+
+* This cookbook install and configures only simplified 'stand-alone' Munin configuration, i.e. setup when both server and client -- munin and munin-node -- run on the same host and server polls only localhost.
+
+* Users -- login id and passwords -- for basic auth must be configured in node's *.js file (or in attributes file if you decide so).
+
+Additional attributes
+---------------------
+
+* sysadmins - Array of 2 element hashes: 
+
+    { "id": <HTTP basic auth login name>,
+      "htpasswd": <hashed password>
+      }
+
+See below regarding password generation.
+
+Example of node.js file
+-----------------------
+
+     {
+          "munin" : {
+            "web_server" : "nginx",
+            "server_auth_method" : "basic"
+      },
+      "sysadmins" : 
+        [
+            { "id": "munin", "htpasswd": "XXXXXXXXX" }    
+        ],
+      "run_list": [
+        "recipe[munin::server]",
+        "recipe[munin::client]"
+      ]
+     }
+
+
+Original README
+===============
+
+Below is text of the original README.md file by Opscode without changes.
+
+
 Description
 ===========
 
