@@ -6,7 +6,7 @@ server {
   error_log <%= File.join(@log_dir, 'nginx_error.log') %>;
 
   location /munin {
-    root <%= @docroot %>;
+    root <%= File.dirname @docroot %>;
   }
   
   location / {

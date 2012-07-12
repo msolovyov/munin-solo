@@ -21,6 +21,7 @@
 munin_servers = [node]
 
 package "munin-node"
+package "munin-plugins-extra"
 
 service "munin-node" do
   supports :restart => true
@@ -34,10 +35,10 @@ template "#{node['munin']['basedir']}/munin-node.conf" do
   notifies :restart, resources(:service => "munin-node")
 end
 
-case node[:platform]
-when "arch"
+# case node[:platform]
+# when "arch"
   execute "munin-node-configure --shell | sh" do
     not_if { Dir.entries(node['munin']['plugins']).length > 2 }
     notifies :restart, "service[munin-node]"
   end
-end
+# end
