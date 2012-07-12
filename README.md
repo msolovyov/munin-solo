@@ -12,6 +12,8 @@ No data bags available therefore, no seaches can be performed durng deployment. 
 
 * Users -- login id and passwords -- for basic auth must be configured in node's *.js file (or in attributes file if you decide so).
 
+Nginx virtual host is configured with server name set to IP address of the node. This way it won't be clashing with nginx server name if nginx is used to serve other content.
+
 Additional attributes
 ---------------------
 
