@@ -52,15 +52,15 @@ Additional Munin plugins included with this cookbook:
 Unicorn
 -------
 
-Unicorn plugins are installed by default/unicorn.rb recipe.
+Unicorn plugins are installed by `default/unicorn.rb` recipe.
 
-* unicorn_connections_ - wildcard plugin, needs creating symlinks with port number. 
+* `unicorn_connections_` - wildcard plugin, needs creating symlinks with port number. 
 
   See http://blog.loftninjas.org/2011/02/11/monitoring-unicorn-connections-with-munin/ 
 
   
 
-* unicorn_status - http://exchange.munin-monitoring.org/plugins/unicorn_status/version/1
+* `unicorn_status` - http://exchange.munin-monitoring.org/plugins/unicorn_status/version/1
 
 Nginx
 -----
@@ -69,10 +69,10 @@ Source http://zeldor.biz/2011/01/nginx-plugins-for-munin/
 
 Plugins installed by `default/nginx.rb` recipe.
 
-* nginx_memory  
-* nginx_request 
-* nginx_status  
-* nginx_traffic
+* `nginx_memory`  
+* `nginx_request` 
+* `nginx_status`  
+* `nginx_traffic`
 
 Original README
 ===============
