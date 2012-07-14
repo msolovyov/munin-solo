@@ -17,6 +17,21 @@
 # limitations under the License.
 #
 
-munin_plugin "nginx_memory"
-munin_plugin "nginx_request"
-munin_plugin "nginx_status"
+
+package "logtail" # Required for nginx_traffic
+
+# http://zeldor.biz/2011/01/nginx-plugins-for-munin/
+
+[ "nginx_memory", "nginx_request", "nginx_status", "nginx_traffic" ].each do  |plg|
+  munin_plugin plg do
+    plugin plg
+    create_file true
+    notifies :restart, "service[munin-node]"
+  end
+end
+
+template "#{node['munin']['basedir']}/plugin-conf.d/nginx_traffic" do
+  source "plugin-conf.d/nginx_traffic.erb"
+  mode 0644
+  notifies :restart, resources(:service => "munin-node")
+end

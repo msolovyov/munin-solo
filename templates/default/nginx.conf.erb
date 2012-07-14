@@ -2,16 +2,20 @@ server {
   
   listen <%= @listen_port %>;
   server_name munin <%= node[:ipaddress] -%>;
-  access_log <%= File.join(@log_dir, 'nginx_access.log') %>;
-  error_log <%= File.join(@log_dir, 'nginx_error.log') %>;
+  access_log <%= node[:nginx][:log_dir] %>/access.log;
+  error_log <%= node[:nginx][:log_dir] %>/error.log;
 
   location /munin {
     root <%= File.dirname @docroot %>;
-  }
-  
-  location / {
     auth_basic "Munin Server";
     auth_basic_user_file <%= @htpasswd_file %>;
-    root <%= @docroot %>;
   }
+
+  location /nginx_status {
+    stub_status on;
+    access_log off;
+    allow 127.0.0.1;
+    deny all;
+  }
+  
 }
