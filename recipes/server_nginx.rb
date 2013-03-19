@@ -11,7 +11,7 @@ include_recipe "nginx"
   end
 end
 
-munin_conf = File.join(node[:nginx][:dir], 'sites-available', 'munin.conf')
+munin_conf = File.join(node[:nginx][:dir], 'sites-enabled', 'munin.conf')
 
 if node[:public_domain]
   case node.chef_environment
