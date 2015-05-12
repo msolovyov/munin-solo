@@ -24,8 +24,11 @@ package "munin-node"
 package "munin-plugins-extra"
 
 service "munin-node" do
-  supports :restart => true
-  action :enable
+  if node[:lsb][:release].to_f >= 14.04
+    provider Chef::Provider::Service::Upstart
+  end
+  action [:enable, :start]
+  supports :status => true, :restart => true, :reload => true
 end
 
 template "#{node['munin']['basedir']}/munin-node.conf" do
